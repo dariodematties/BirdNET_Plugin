@@ -9,8 +9,57 @@ from utils import audio
 from model import model
 from utils import log
 
+from waggle import plugin
+from waggle.data.audio import Microphone
+from time import sleep
+
 import warnings
 warnings.filterwarnings('ignore')
+
+################### PUBLISHIN OUTPUTS ###################
+def publishOutputs(path, file_type='wav'):
+    counter = 0
+    while True:
+        filename = "sample_" + str(counter) + "." + file_type
+        if os.path.isfile(os.path.abspath(os.path.join(path, filename))):
+            log.p(('REMOVING INPUT SAMPLE NUMBER:', counter, '...'), new_line=False)
+            os.remove(os.path.abspath(os.path.join(path, filename)))
+            log.p(('DONE!'))
+        else:
+            break
+
+        counter += 1
+
+################### CLEANING INPUTS #####################
+def deleteInputFiles(path, file_type='wav'):
+    counter = 0
+    while True:
+        filename = "sample_" + str(counter) + "." + file_type
+        if os.path.isfile(os.path.abspath(os.path.join(path, filename))):
+            log.p(('REMOVING INPUT SAMPLE NUMBER:', counter, '...'), new_line=False)
+            os.remove(os.path.abspath(os.path.join(path, filename)))
+            log.p(('DONE!'))
+        else:
+            break
+
+        counter += 1
+
+
+################### AUDIO RECORDING #####################
+def audioRecording(path, number_of_recordings, silence_interval, sound_interval, file_type='wav'):
+
+    log.p(('IN THIS RUN', number_of_recordings, 'FILES OF', sound_interval, 'SECONDS WILL BE PROCESSED'))
+    microphone = Microphone()
+    for i in range(number_of_recordings):
+        # Recording audio
+        log.p(('RECORDING NUMBER:', i))
+        log.p(('RECORDING AUDIO FROM MIC DURING:', sound_interval, 'SECONDS...'), new_line=False)
+        sample = microphone.record(sound_interval)
+        filename = "sample_" + str(i) + "." + file_type
+        sample.save(os.path.abspath(os.path.join(path, filename)))
+        log.p(('DONE!'))
+        sleep(silence_interval)
+
 
 ################### DATASAT HANDLING ####################
 def parseTestSet(path, file_type='wav'):
@@ -209,7 +258,7 @@ def analyzeFile(soundscape, test_function):
     return analysis
 
 ######################## MAIN ###########################
-def process(soundscape, sid, out_dir, out_type, test_function):
+def process(plugin, soundscape, sid, out_dir, out_type, test_function):
 
     # Time
     start = time.time()
@@ -230,7 +279,6 @@ def process(soundscape, sid, out_dir, out_type, test_function):
     if out_type == 'raven':
         with open(os.path.join(out_dir, os.path.splitext(soundscape.split(os.sep)[-1])[0] + '.BirdNET.selections.txt'), 'w') as stfile:
             stfile.write(stable)
-
     else:
         with open(os.path.join(out_dir, os.path.splitext(soundscape.split(os.sep)[-1])[0] + '.BirdNET.Audacity_Labels.txt'), 'w') as stfile:
             stfile.write(atext)        
@@ -240,10 +288,17 @@ def process(soundscape, sid, out_dir, out_type, test_function):
 
     # Stats
     log.p(('TIME:', int(t)))
+    plugin.publish("time" + str(sid), t)
+
 
 def main():
 
     parser = argparse.ArgumentParser()
+
+    parser.add_argument('--num_rec', type=int, default=1, help='Number of microphone recordings. Each mic recording will be saved in a different file. Default to 1.')
+    parser.add_argument('--silence_int', type=float, default=1.0, help='Time interval [s] in which there is not sound recording. Default to 0.0.')
+    parser.add_argument('--sound_int', type=float, default=10.0, help='Time interval [s] in which there is sound recording. Default to 10.0.')
+
     parser.add_argument('--i', default='audio', help='Path to input file or directory.')
     parser.add_argument('--o', default='', help='Path to output directory. If not specified, the input directory will be used.')
     parser.add_argument('--filetype', default='wav', help='Filetype of soundscape recordings. Defaults to \'wav\'.')
@@ -255,8 +310,14 @@ def main():
     parser.add_argument('--spp', type=int, default=1, help='Combines probabilities of multiple spectrograms to one prediction. Defaults to 1.')
     parser.add_argument('--sensitivity', type=float, default=1.0, help='Sigmoid sensitivity; Higher values result in lower sensitivity. Values in [0.25, 2.0]. Defaults to 1.0.')
     parser.add_argument('--min_conf', type=float, default=0.1, help='Minimum confidence threshold. Values in [0.01, 0.99]. Defaults to 0.1.')
-
+    parser.add_argument('--keep', action='store_true', help='Keeps all the input files collected from the mic.')
     args = parser.parse_args()
+
+    # starting plugin
+    plugin.init()
+
+    # Record audio
+    audioRecording(args.i, args.num_rec, args.silence_int, args.sound_int, args.filetype)
 
     # Parse dataset
     dataset = parseTestSet(args.i, args.filetype)
@@ -285,7 +346,10 @@ def main():
 
         # Analyze dataset
         for s in dataset:
-            process(s, dataset.index(s) + 1, result_path, args.results, test_function)
+            process(plugin, s, dataset.index(s) + 1, result_path, args.results, test_function)
+
+        if not args.keep:
+            deleteInputFiles(args.i, args.filetype)
 
 if __name__ == '__main__':
 

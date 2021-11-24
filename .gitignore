@@ -3,3 +3,9 @@
 model/BirdNET_Soundscape_Model.pkl
 .vscode
 datasets/
+*.swo
+*.swp
+*.ogg
+*.wav
+*.txt
+example/

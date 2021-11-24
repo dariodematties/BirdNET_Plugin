@@ -11,6 +11,11 @@ RUN pip install numpy scipy librosa future
 RUN pip install -r https://raw.githubusercontent.com/Lasagne/Lasagne/master/requirements.txt
 RUN pip install https://github.com/Lasagne/Lasagne/archive/master.zip
 
+# Install pywaggle
+RUN pip install opencv-python
+RUN git clone https://github.com/waggle-sensor/pywaggle
+RUN pip install ./pywaggle[audio]
+
 # Import all scripts
 COPY . ./
 
