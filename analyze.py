@@ -16,19 +16,22 @@ from time import sleep
 import warnings
 warnings.filterwarnings('ignore')
 
-################### PUBLISHIN OUTPUTS ###################
-def publishOutputs(path, file_type='wav'):
-    counter = 0
-    while True:
-        filename = "sample_" + str(counter) + "." + file_type
-        if os.path.isfile(os.path.abspath(os.path.join(path, filename))):
-            log.p(('REMOVING INPUT SAMPLE NUMBER:', counter, '...'), new_line=False)
-            os.remove(os.path.abspath(os.path.join(path, filename)))
-            log.p(('DONE!'))
-        else:
-            break
 
-        counter += 1
+
+################### PUBLISHING DATA #####################
+def publishData(plugin, time, file_path, sid):
+    log.p(('PUBLISHING PROCESSING TIME', sid, '...'), new_line=False)
+    plugin.publish("time" + str(sid), time)
+    log.p(('DONE!'))
+    
+
+    with open(file_path, 'r') as file:
+        log.p(('PUBLISHING OUTPUT FILE', sid, '...'), new_line=False)
+        data = file.read().replace('\n', ' ')
+        plugin.publish("outputs" + str(sid), data)
+        log.p(('DONE!'))
+
+
 
 ################### CLEANING INPUTS #####################
 def deleteInputFiles(path, file_type='wav'):
@@ -277,10 +280,13 @@ def process(plugin, soundscape, sid, out_dir, out_type, test_function):
         os.makedirs(out_dir)
     
     if out_type == 'raven':
-        with open(os.path.join(out_dir, os.path.splitext(soundscape.split(os.sep)[-1])[0] + '.BirdNET.selections.txt'), 'w') as stfile:
+        file_path = os.path.join(out_dir, os.path.splitext(soundscape.split(os.sep)[-1])[0] + '.BirdNET.selections.txt')
+        with open(file_path, 'w') as stfile:
             stfile.write(stable)
+
     else:
-        with open(os.path.join(out_dir, os.path.splitext(soundscape.split(os.sep)[-1])[0] + '.BirdNET.Audacity_Labels.txt'), 'w') as stfile:
+        file_path = os.path.join(out_dir, os.path.splitext(soundscape.split(os.sep)[-1])[0] + '.BirdNET.Audacity_Labels.txt')
+        with open(file_path, 'w') as stfile:
             stfile.write(atext)        
 
     # Time
@@ -288,8 +294,8 @@ def process(plugin, soundscape, sid, out_dir, out_type, test_function):
 
     # Stats
     log.p(('TIME:', int(t)))
-    plugin.publish("time" + str(sid), t)
 
+    publishData(plugin, t, file_path, sid)
 
 def main():
 
