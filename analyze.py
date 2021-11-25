@@ -20,13 +20,13 @@ warnings.filterwarnings('ignore')
 
 ################### PUBLISHING DATA #####################
 def publishData(plugin, time, file_path, sid):
-    log.p(('PUBLISHING PROCESSING TIME', sid, '...'), new_line=False)
+    log.p(('PUBLISHING PROCESSING TIME FOR SID', sid, '...'), new_line=False)
     plugin.publish("time" + str(sid), time)
     log.p(('DONE!'))
     
 
     with open(file_path, 'r') as file:
-        log.p(('PUBLISHING OUTPUT FILE', sid, '...'), new_line=False)
+        log.p(('PUBLISHING OUTPUT FILE FOR SID', sid, '...'), new_line=False)
         data = file.read().replace('\n', ' ')
         plugin.publish("outputs" + str(sid), data)
         log.p(('DONE!'))
