@@ -66,3 +66,5 @@ REMOVING INPUT SAMPLE NUMBER: 1 ... DONE!
 ```
 
 Since I couldn't pyblish the output files, I just published the strigns extracted from them.
+
+During recording please make funny noises in your mic, BirdNET will detect such noises as certain birds with low probability. In such a way you will be able to see the format of the output files.
