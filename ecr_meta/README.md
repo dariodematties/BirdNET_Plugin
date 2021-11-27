@@ -2,59 +2,34 @@
 
 ## Usage
 
-So far I have only been able to make it work in my Linux machine.
+### This plugin has the following knobs
 
-```
-lsb_release -a
-No LSB modules are available.
-Distributor ID:	Ubuntu
-Description:	Ubuntu 20.04.3 LTS
-Release:	20.04
-Codename:	focal
-```
+   **--num_rec**      'Number of microphone recordings. Each mic recording will be saved in a different file. Default to 1.'
+    
+   **--silence_int**  'Time interval [s] in which there is not sound recording. Default to 0.0.'
+    
+   **--sound_int**    'Time interval [s] in which there is sound recording. Default to 10.0.'
 
-Please, reffer to the [pywaggle](https://github.com/waggle-sensor/pywaggle) and [BirdNET](https://github.com/kahst/BirdNET) repositories to instal the necessary dependences.
+   **--i**			      'Path to input file or directory. Default='audio'
+   
+   **--o**			      'Path to output directory. If not specified, the input directory will be used.'
+   
+   **--filetype**		  'Filetype of soundscape recordings. Defaults to \'wav\'.
+   
+   **--results**		  'Output format of analysis results. Values in [\'audacity\', \'raven\']. Defaults to \'raven\'.
+   
+   **--lat**		      'Recording location latitude. It is a float. Set -1 to ignore (which is set by default).
+   
+   **--lon**		      'Recording location longitude. It is a float. Set -1 to ignore (which is set by default).
+   
+   **--week**		      'Week of the year when the recordings were made. It is an int. Values in [1, 48]. Set -1 to ignore (which is set by default).'
+   
+   **--overlap**		  'Overlap in seconds between extracted spectrograms. It is a float. Values in [0.0, 2.9]. Default is 0.0.'
+   
+   **--spp**		      'Combines probabilities of multiple spectrograms to one prediction. It is an int. Defaults to 1.'
+   
+   **--sensitivity**	'Sigmoid sensitivity; Higher values result in lower sensitivity. It is a float. Values in [0.25, 2.0]. Defaults to 1.0.'
+   
+   **--min_conf**     'Minimum confidence threshold. Values in [0.01, 0.99]. It is a float. Defaults to 0.1.'
 
-For usage just clone this repository
 
-`https://github.com/dariodematties/BirdNET_Plugin.git`
-
-Then
-
-`cd BirdNET_Plugin`
-
-create a folder to contain all the analysis
-
-`mkdir my_folder`
-
-and finally run
-
-`python3 analyze.py --i my_folder --num_rec 2`
-
-which will record 2 audio files of 10 seconds each, analyze them, publish the results and inference times of each file and finally remove the recorded input files.
-
-```
-IN THIS RUN 2 FILES OF 10.0 SECONDS WILL BE PROCESSED 
-RECORDING NUMBER: 0 
-RECORDING AUDIO FROM MIC DURING: 10.0 SECONDS... DONE! 
-RECORDING NUMBER: 1 
-RECORDING AUDIO FROM MIC DURING: 10.0 SECONDS... DONE! 
-FILES IN DATASET: 2 
-LOADING SNAPSHOT BirdNET_Soundscape_Model.pkl ... DONE! 
-BUILDING BirdNET MODEL... DONE! 
-IMPORTING MODEL PARAMS... DONE! 
-COMPILING THEANO TEST FUNCTION FUNCTION... DONE! 
-LOADING eBIRD GRID DATA... DONE! 13800 GRID CELLS 
-SID: 1 PROCESSING: sample_1.wav SPECIES: 987 DETECTIONS: 8 TIME: 3 
-PUBLISHING PROCESSING TIME FOR SID 1 ... DONE! 
-PUBLISHING OUTPUT FILE FOR SID 1 ... DONE! 
-SID: 2 PROCESSING: sample_0.wav SPECIES: 987 DETECTIONS: 8 TIME: 4 
-PUBLISHING PROCESSING TIME FOR SID 2 ... DONE! 
-PUBLISHING OUTPUT FILE FOR SID 2 ... DONE! 
-REMOVING INPUT SAMPLE NUMBER: 0 ... DONE! 
-REMOVING INPUT SAMPLE NUMBER: 1 ... DONE!
-```
-
-Since I couldn't pyblish the output files, I just published the strigns extracted from them.
-
-During recording please make funny noises in your mic, BirdNET will detect such noises as certain birds with low probability. In such a way you will be able to see the format of the output files.
