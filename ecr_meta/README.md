@@ -31,5 +31,8 @@
    **--sensitivity**	'Sigmoid sensitivity; Higher values result in lower sensitivity. It is a float. Values in [0.25, 2.0]. Defaults to 1.0.'
    
    **--min_conf**     'Minimum confidence threshold. Values in [0.01, 0.99]. It is a float. Defaults to 0.1.'
+   
+   **--keep**         'Keeps all the input files collected from the mic. Default is false'
+
 
 
