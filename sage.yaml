@@ -1,0 +1,13 @@
+name: "BirdNET_Plugin"
+description: "Records environmental sounds, identifies birds by such sounds and finally publishes the results"
+version: "0.0.1"
+keywords: "microhpone, sounds, birds, classification"
+authors: "Dario Dematties <dario.dematties@northwestern.edu>"
+funding: ""
+license: "Creative commons license by-nc-sa 4.0"
+homepage: "https://github.com/dariodematties/BirdNET_Plugin/blob/master/README.md"
+source:
+  architectures:
+    - "linux/x86_64"
+  url: "https://github.com/dariodematties/BirdNET_Plugin"
+  branch: "master"
