@@ -68,3 +68,46 @@ REMOVING INPUT SAMPLE NUMBER: 1 ... DONE!
 Since I couldn't pyblish the output files, I just published the strigns extracted from them.
 
 During recording please make funny noises in your mic, BirdNET will detect such noises as certain birds with low probability. In such a way you will be able to see the format of the output files.
+
+Depending on the output format chosen we can have:
+
+```
+cat sample_0.BirdNET.selections.txt 
+Selection	View	Channel	Begin File	Begin Time (s)	End Time (s)	Low Freq (Hz)	High Freq (Hz)	Species Code	Common Name	Confidence	Rank
+1	Spectrogram 1	1	sample_0.wav	3.0	6.0	150	15000	????	Human	0.1630938714561858	1
+2	Spectrogram 1	1	sample_0.wav	3.0	6.0	150	15000	pilwoo	Pileated Woodpecker	0.13970647230876135	2
+3	Spectrogram 1	1	sample_0.wav	6.0	9.0	150	15000	????	Human	0.9452884101995301	1
+4	Spectrogram 1	1	sample_0.wav	9.0	12.0	150	15000	mouqua	Mountain Quail	0.2105246557640988	1
+5	Spectrogram 1	1	sample_0.wav	9.0	12.0	150	15000	rebwoo	Red-bellied Woodpecker	0.10444559623221135	2
+6	Spectrogram 1	1	sample_0.wav	0.0	3.0	150	15000	bkbwoo	Black-backed Woodpecker	0.11463341843463595	1
+```
+that is the default or
+
+```
+cat sample_0.BirdNET.Audacity_Labels.txt 
+1.0	4.0	Eastern Screech-Owl;0.78
+1.0	4.0	Tawny Owl;0.3
+1.0	4.0	Common Loon;0.13
+2.0	5.0	Tawny Owl;0.28
+2.0	5.0	Boreal Owl;0.26
+2.0	5.0	Western Screech-Owl;0.21
+2.0	5.0	Eurasian Scops-Owl;0.19
+2.0	5.0	Northern Saw-whet Owl;0.16
+2.0	5.0	Little Owl;0.13
+2.0	5.0	Northern Pygmy-Owl;0.11
+3.0	6.0	Tawny Owl;0.33
+3.0	6.0	Boreal Owl;0.3
+3.0	6.0	Eurasian Scops-Owl;0.29
+3.0	6.0	Little Owl;0.2
+3.0	6.0	Northern Saw-whet Owl;0.19
+3.0	6.0	Western Screech-Owl;0.13
+4.0	7.0	Boreal Owl;0.49
+4.0	7.0	Whiskered Screech-Owl;0.23
+4.0	7.0	Tawny Owl;0.13
+4.0	7.0	Northern Saw-whet Owl;0.13
+4.0	7.0	Northern Pygmy-Owl;0.11
+7.0	10.0	Human;0.26
+8.0	11.0	Human;0.37
+9.0	12.0	Human;0.54
+```
+that is when Audacity format is chosen.
