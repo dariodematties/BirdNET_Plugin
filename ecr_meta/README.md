@@ -36,3 +36,40 @@
 
 
 
+### The Output of the plugin is a text file
+
+- If **--results** knob is *raven* (which is the default), the output file is organized in a table with the following columns in which each detection has a row:
+
+  * **Selection:** Is the detection number.
+
+  * **View:** ?.
+
+  * **Channel:** ?.
+
+  * **Begin File:** The name of the input file.
+
+  * **Begin Time (s):** Time mark to which the detection begins.
+
+  * **End Time (s):** Time mark to which the detection ends.
+
+  * **Low Freq (Hz):** Lowest frequency of the analysis.
+
+  * **High Freq (Hz):** Highest frequency of the analysis.
+
+  * **Species Code:** A code to identify the avian species.
+
+  * **Common Name:** Colloquial name given to the species.
+
+  * **Confidence:** Classification confidence level (from 0.0 to 1.0).
+
+  * **Rank:** The process number to get the output.
+
+- If  **--results** knob is *audacity* the output is organized in a table with the following columns:
+
+  * **Begin Time (s):** Time mark to which the detection begins.
+
+  * **End Time (s):** Time mark to which the detection ends.
+
+  * **Common Name:** Colloquial name given to the species.
+
+  * **Confidence:** Classification confidence level (from 0.0 to 1.0).
