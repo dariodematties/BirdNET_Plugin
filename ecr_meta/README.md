@@ -62,7 +62,7 @@
 
   * **Confidence:** Classification confidence level (from 0.0 to 1.0).
 
-  * **Rank:** The process number to get the output.
+  * **Rank:** When more than one classification in a window, Rank specifies a classification ranking based on the confidence.
 
 - If  **--results** knob is *audacity* the output is organized in a table with the following columns:
 
