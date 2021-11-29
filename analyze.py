@@ -27,7 +27,7 @@ def publishData(plugin, time, file_path, sid):
 
     with open(file_path, 'r') as file:
         log.p(('PUBLISHING OUTPUT FILE FOR SID', sid, '...'), new_line=False)
-        data = file.read().replace('\n', ' ')
+        data = file.read().replace('\n', ' ****** ')
         plugin.publish("outputs" + str(sid), data)
         log.p(('DONE!'))
 
