@@ -1,7 +1,7 @@
 name: "BirdNET_Plugin"
 description: "Records environmental sounds, identifies birds by such sounds and finally publishes the results"
 version: "0.0.1"
-keywords: "microhpone, sounds, birds, classification"
+keywords: "microhpone, sounds, birds classification, avian diversity"
 authors: "Dario Dematties <dario.dematties@northwestern.edu>"
 funding: ""
 license: "Creative commons license by-nc-sa 4.0"
