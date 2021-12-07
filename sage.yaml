@@ -3,8 +3,9 @@ description: "Records environmental sounds, identifies birds by such sounds and 
 version: "0.0.1"
 keywords: "microhpone, sounds, birds classification, avian diversity"
 authors: "Dario Dematties <dario.dematties@northwestern.edu>"
-funding: ""
-license: "Creative commons license by-nc-sa 4.0"
+funding: "NSF 1935984 (and hyperlink of it: https://www.nsf.gov/awardsearch/showAward?AWD_ID=1935984)"
+Collaborators: "Bhupendra Raut, Dario Dematties Reyes, Joseph Swantek, Neal Conrad, Nicola Ferrier, Pete Beckman, Raj Sankaran, Robert Jackson, Scott Collis, Sean Shahkarami, Seongha Park, Sergey Shemyakin, Wolfgang Gerlach, Yongho kim"
+license: "Creative commons license 4.0"
 homepage: "https://github.com/dariodematties/BirdNET_Plugin/blob/master/README.md"
 source:
   architectures:
