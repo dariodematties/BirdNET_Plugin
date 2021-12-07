@@ -68,14 +68,31 @@ During recording please make funny noises in your mic, BirdNET will detect such 
 Depending on the output format chosen we can have:
 
 ```
-cat sample_0.BirdNET.selections.txt 
-Selection	View	Channel	Begin File	Begin Time (s)	End Time (s)	Low Freq (Hz)	High Freq (Hz)	Species Code	Common Name	Confidence	Rank
-1	Spectrogram 1	1	sample_0.wav	3.0	6.0	150	15000	????	Human	0.1630938714561858	1
-2	Spectrogram 1	1	sample_0.wav	3.0	6.0	150	15000	pilwoo	Pileated Woodpecker	0.13970647230876135	2
-3	Spectrogram 1	1	sample_0.wav	6.0	9.0	150	15000	????	Human	0.9452884101995301	1
-4	Spectrogram 1	1	sample_0.wav	9.0	12.0	150	15000	mouqua	Mountain Quail	0.2105246557640988	1
-5	Spectrogram 1	1	sample_0.wav	9.0	12.0	150	15000	rebwoo	Red-bellied Woodpecker	0.10444559623221135	2
-6	Spectrogram 1	1	sample_0.wav	0.0	3.0	150	15000	bkbwoo	Black-backed Woodpecker	0.11463341843463595	1
+Selection	View		Channel	Begin File	Begin Time (s)	End Time (s)	
+1		Spectrogram 1	1	sample_0.wav	3.0		6.0	
+2		Spectrogram 1	1	sample_0.wav	3.0		6.0	
+3		Spectrogram 1	1	sample_0.wav	6.0		9.0	
+4		Spectrogram 1	1	sample_0.wav	9.0		12.0	
+5		Spectrogram 1	1	sample_0.wav	9.0		12.0
+6		Spectrogram 1	1	sample_0.wav	0.0		3.0	
+
+
+Low Freq (Hz)	High Freq (Hz)	Species Code	Common Name	
+150		15000		????		Human		
+150		15000		pilwoo		Pileated Woodpecker	
+150		15000		????		Human	
+150		15000		mouqua		Mountain Quail	
+150		15000		rebwoo		Red-bellied Woodpecker	
+150		15000		bkbwoo		Black-backed Woodpecker	
+
+Confidence		Rank
+0.1630938714561858	1
+0.13970647230876135	2
+0.9452884101995301	1
+0.2105246557640988	1
+0.10444559623221135	2
+0.11463341843463595	1
+
 ```
 that is the default or
 
