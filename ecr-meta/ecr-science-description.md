@@ -193,4 +193,11 @@ The Output of the plugin is a text file
 
 # Credits
 
+- Image credit:
+  * Creator: Becky Matsubara 
+  * Copyright: © 2017, Becky Matsubara
 
+- Original [BirdNET](https://github.com/kahst/BirdNET) network by
+  * Stefan Kahl
+  * Shyam Madhusudhana
+  * Holger Klinck
