@@ -12,6 +12,9 @@ Following this line, *Avian diversity monitoring on the edge* is an autonomous a
 
 This project will allow the determination of avian biodiversity autonomously through the use of machine learning on edge devices by placing microphones in specific forest locations. Consequently it will be possible to get exposure to many different organisms occupying such areas without needing to detect them during demanding and expensive human fieldwork [1].
 
+In the figure at the right (Credits to S. Kahl et al.) we can see an illustration of the utility of this network.
+In  such a figure we can see the migratory species occurrence correlation (r) between weekly cumulative BirdNET detections (in blue) and human point count observations (eBird checklist frequency, in red). As can be see in the plot, the detections of the Network closely resemble human observational performance. In [1], the authors achieved a high correlation for migratory species that vocalize frequently (i.e., multiple hundreds of detections per week). This is indicative of the importance of this kind of automated detection systems.
+
 # AI@Edge
 
 We are using a DNN, called **BirdNET**, which is designed to identify 984 North American and European bird species by sound. The model architecture is derived from the family of residual networks (ResNets), consists of 157 layers with more than 27 million parameters, and was trained using extensive data pre-processing, augmentation, and mixup [1].
