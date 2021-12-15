@@ -39,7 +39,7 @@ create a folder to contain all the analysis
 
 and finally run
 
-`python3 analyze.py --i my_folder --num_rec 2`
+`python3 analyze.py --i my_folder --record_from_mic --publish --num_rec 2`
 
 which will record 2 audio files of 10 seconds each, analyze them, publish the results and inference times of each file and finally remove the recorded input files.
 

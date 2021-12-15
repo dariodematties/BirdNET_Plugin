@@ -4,6 +4,8 @@
 
 ### This plugin has the following knobs
 
+   **--record_from_mic** 'Enable microphone recording. Default False.'
+
    **--num_rec**      'Number of microphone recordings. Each mic recording will be saved in a different file. Default to 1.'
     
    **--silence_int**  'Time interval [s] in which there is not sound recording. Default to 0.0.'
@@ -33,6 +35,8 @@
    **--min_conf**     'Minimum confidence threshold. Values in [0.01, 0.99]. It is a float. Defaults to 0.1.'
    
    **--keep**         'Keeps all the input files collected from the mic. Default is false'
+
+   **--publish**      'Publishes the outputs of the plugin. Default to False.'
 
 
 
