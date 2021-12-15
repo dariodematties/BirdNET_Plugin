@@ -9,7 +9,7 @@ from utils import audio
 from model import model
 from utils import log
 
-from waggle import plugin
+from waggle.plugin import Plugin
 from waggle.data.audio import Microphone
 from time import sleep
 
@@ -49,10 +49,9 @@ def deleteInputFiles(path, file_type='wav'):
 
 
 ################### AUDIO RECORDING #####################
-def audioRecording(path, number_of_recordings, silence_interval, sound_interval, file_type='wav'):
+def audioRecording(microphone, path, number_of_recordings, silence_interval, sound_interval, file_type='wav'):
 
     log.p(('IN THIS RUN', number_of_recordings, 'FILES OF', sound_interval, 'SECONDS WILL BE PROCESSED'))
-    microphone = Microphone()
     for i in range(number_of_recordings):
         # Recording audio
         log.p(('RECORDING NUMBER:', i))
@@ -261,7 +260,7 @@ def analyzeFile(soundscape, test_function):
     return analysis
 
 ######################## MAIN ###########################
-def process(plugin, soundscape, sid, out_dir, out_type, test_function):
+def process(plugin, soundscape, sid, out_dir, out_type, publish, test_function):
 
     # Time
     start = time.time()
@@ -295,12 +294,14 @@ def process(plugin, soundscape, sid, out_dir, out_type, test_function):
     # Stats
     log.p(('TIME:', int(t)))
 
-    publishData(plugin, t, file_path, sid)
+    if publish:
+        publishData(plugin, t, file_path, sid)
 
 def main():
 
     parser = argparse.ArgumentParser()
 
+    parser.add_argument('--record_from_mic', action='store_true', help='Enable microphone recording (default False).')
     parser.add_argument('--num_rec', type=int, default=1, help='Number of microphone recordings. Each mic recording will be saved in a different file. Default to 1.')
     parser.add_argument('--silence_int', type=float, default=1.0, help='Time interval [s] in which there is not sound recording. Default to 0.0.')
     parser.add_argument('--sound_int', type=float, default=10.0, help='Time interval [s] in which there is sound recording. Default to 10.0.')
@@ -317,13 +318,14 @@ def main():
     parser.add_argument('--sensitivity', type=float, default=1.0, help='Sigmoid sensitivity; Higher values result in lower sensitivity. Values in [0.25, 2.0]. Defaults to 1.0.')
     parser.add_argument('--min_conf', type=float, default=0.1, help='Minimum confidence threshold. Values in [0.01, 0.99]. Defaults to 0.1.')
     parser.add_argument('--keep', action='store_true', help='Keeps all the input files collected from the mic.')
+    parser.add_argument('--publish', action='store_true', help='Publishes the outputs of the plugin (dafault False).')
     args = parser.parse_args()
 
-    # starting plugin
-    plugin.init()
 
     # Record audio
-    audioRecording(args.i, args.num_rec, args.silence_int, args.sound_int, args.filetype)
+    if args.record_from_mic:
+        with Microphone() as microphone:
+            audioRecording(microphone, args.i, args.num_rec, args.silence_int, args.sound_int, args.filetype)
 
     # Parse dataset
     dataset = parseTestSet(args.i, args.filetype)
@@ -351,8 +353,9 @@ def main():
             result_path = args.o
 
         # Analyze dataset
-        for s in dataset:
-            process(plugin, s, dataset.index(s) + 1, result_path, args.results, test_function)
+        with Plugin() as plugin:
+            for s in dataset:
+                process(plugin, s, dataset.index(s) + 1, result_path, args.results, args.publish, test_function)
 
         if not args.keep:
             deleteInputFiles(args.i, args.filetype)
