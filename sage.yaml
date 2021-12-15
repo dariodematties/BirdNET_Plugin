@@ -9,6 +9,6 @@ license: "Creative commons license"
 homepage: "https://github.com/dariodematties/BirdNET_Plugin/blob/master/README.md"
 source:
   architectures:
-    - "linux/amd64"
+    - "linux/arm64"
   url: "https://github.com/dariodematties/BirdNET_Plugin"
   branch: "main"

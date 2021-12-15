@@ -133,6 +133,8 @@ that is when Audacity format is chosen.
 
 This plugin has the following knobs
 
+   **--record_from_mic** 'Enable microphone recording. Default False.'
+
    **--num_rec**      'Number of microphone recordings. Each mic recording will be saved in a different file. Default to 1.'
     
    **--silence_int**  'Time interval [s] in which there is not sound recording. Default to 0.0.'
@@ -163,6 +165,7 @@ This plugin has the following knobs
    
    **--keep**         'Keeps all the input files collected from the mic. Default is false'
 
+   **--publish**      'Publishes the outputs of the plugin. Default to False.'
 
 # Plugin outputs
 

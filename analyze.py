@@ -324,8 +324,11 @@ def main():
 
     # Record audio
     if args.record_from_mic:
-        with Microphone() as microphone:
-            audioRecording(microphone, args.i, args.num_rec, args.silence_int, args.sound_int, args.filetype)
+        microphone = Microphone()
+        audioRecording(microphone, args.i, args.num_rec, args.silence_int, args.sound_int, args.filetype)
+
+        # with Microphone() as microphone:
+        #     audioRecording(microphone, args.i, args.num_rec, args.silence_int, args.sound_int, args.filetype)
 
     # Parse dataset
     dataset = parseTestSet(args.i, args.filetype)

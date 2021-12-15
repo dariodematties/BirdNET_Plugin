@@ -2,3 +2,4 @@ numpy
 scipy
 librosa
 future
+waggle[audio] @ https://github.com/waggle-sensor/pywaggle/releases/download/0.51.1/waggle-0.51.1-py3-none-any.whl

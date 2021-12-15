@@ -11,16 +11,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends git ffmpeg buil
 RUN pip3 install pip --upgrade
 
 # Install required Python packages
-RUN pip3 install numpy scipy librosa future
+COPY requirements.txt /
+RUN pip3 install --no-cache-dir -U -r /requirements.txt
+# RUN pip3 install numpy scipy librosa future
 
 # Install Theano and Lasagne
 RUN pip3 install -r https://raw.githubusercontent.com/Lasagne/Lasagne/master/requirements.txt
 RUN pip3 install https://github.com/Lasagne/Lasagne/archive/master.zip
 
 # Install pywaggle
-RUN pip3 install opencv-python
-RUN git clone https://github.com/waggle-sensor/pywaggle
-RUN pip3 install ./pywaggle[audio]
+# RUN pip3 install opencv-python
+# RUN git clone https://github.com/waggle-sensor/pywaggle
+# RUN pip3 install ./pywaggle[audio]
 
 # Import all scripts
 COPY . ./
